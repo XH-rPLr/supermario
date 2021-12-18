@@ -1,5 +1,5 @@
 package mario;
 
 public enum Id {
-	player;
+	player, wall;
 }

@@ -10,6 +10,8 @@ package mario;
 	import javax.swing.JFrame;
 
 	import mario.entity.Player;
+import mario.input.KeyInput;
+import mario.tile.Wall;
 
 	public class Game extends Canvas implements Runnable {
 	    public static final int WIDTH = 270;
@@ -31,7 +33,10 @@ package mario;
 	    
 	    private void init() {
 	    	handler = new Handler();
-	    	handler.addEntity(new Player(200, 200, 64, 64, true, Id.player, handler));
+
+			addKeyListener(new KeyInput());
+
+	    	handler.addEntity(new Player(300, 520, 64, 64, true, Id.player, handler));
 	    	
 	    }
 	    
@@ -52,8 +57,9 @@ package mario;
 	        }
 	    }
 
-	    public void ßrun() {
+	    public void run() {
 	    	init();
+			requestFocus();
 	        long lastTime = System.nanoTime();
 	        long timer = System.currentTimeMillis();
 	        double delta = 0.0;
@@ -87,16 +93,17 @@ package mario;
 	            return;
 	        }
 	        Graphics g = bs.getDrawGraphics();
-	        g.setColor(Color.BLUE);
+	        g.setColor(Color.BLACK);
 	        g.fillRect(0, 0, getWidth(), getHeight());
-	        g.setColor(Color.DARK_GRAY);
-	        g.fillRect(200, 200, getWidth()-400, getHeight()-400);
+			handler.render(g);
+	        // g.setColor(Color.DARK_GRAY);
+	        // g.fillRect(200, 200, getWidth()-400, getHeight()-400);
 	        g.dispose();
 	        bs.show();
 	    }
 
 	    public void tick() {
-
+			handler.tick();
 	    }
 
 	    public static void main(String[] args) {

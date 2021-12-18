@@ -3,6 +3,7 @@ package mario.tile;
 import mario.Id;
 import mario.Handler;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public abstract class Tile {
 	public int x, y;
@@ -57,5 +58,9 @@ public abstract class Tile {
     }
     public void setVelY(int velY) {
         this.velY = velY;
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(getX(), getY(), width, height);
     }
 }
