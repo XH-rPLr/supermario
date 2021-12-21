@@ -28,7 +28,6 @@ public class Handler {
         for (Tile ti:tile) {
             ti.tick();
         }
-
     }
     public void addEntity(Entity en) {
         entity.add(en);
