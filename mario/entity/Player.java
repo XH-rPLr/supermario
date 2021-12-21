@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import mario.Handler;
 import mario.Id;
 import mario.tile.Tile;
+import mario.Game;
+
 
 public class Player extends Entity {
 
@@ -15,8 +17,7 @@ public class Player extends Entity {
 	}
 
 	public void render(Graphics g) {
-		g.setColor(Color.GRAY);
-		g.fillRect(x, y, width, height);
+		g.drawImage(Game.player.getBufferedImage(), x, y, width, height, null);
 	}
 
 	public void tick() {

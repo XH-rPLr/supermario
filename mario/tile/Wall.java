@@ -1,10 +1,10 @@
 package mario.tile;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import mario.Handler;
 import mario.Id;
+import mario.Game;
 
 public class Wall extends Tile {
 
@@ -14,8 +14,7 @@ public class Wall extends Tile {
     }
 
     public void render(Graphics g) {
-       g.setColor(Color.RED);
-       g.fillRect(x, y, width, height);
+        g.drawImage(Game.grass.getBufferedImage(), x, y, width, height, null);
     }
 
     public void tick() {

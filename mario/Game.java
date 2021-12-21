@@ -9,6 +9,8 @@ package mario;
 	import javax.swing.JFrame;
 
 	import mario.entity.Player;
+	import mario.graphics.SpriteSheet;
+	import mario.graphics.Sprite;
 import mario.input.KeyInput;
 import mario.tile.Wall;
 
@@ -22,6 +24,10 @@ import mario.tile.Wall;
 	    private boolean running = false;
 
 	    public static Handler handler;
+		public static SpriteSheet sheet;
+
+		public static Sprite grass;
+		public static Sprite player;
 	    
 	    public Game() {
 	        Dimension size = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
@@ -32,8 +38,12 @@ import mario.tile.Wall;
 	    
 	    private void init() {
 	    	handler = new Handler();
+			sheet = new SpriteSheet("/resources/SpriteSheet.png");
 
 			addKeyListener(new KeyInput());
+
+			grass = new Sprite(sheet, 2, 1);
+			player = new Sprite(sheet, 1, 1);
 
 	    	handler.addEntity(new Player(300, 520, 64, 64, true, Id.player, handler));
 	    	
