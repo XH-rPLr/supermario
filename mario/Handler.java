@@ -44,8 +44,17 @@ public class Handler {
 
     public void createLevel() {
         for (int i = 0; i < Game.WIDTH * Game.SCALE / 64 + 1; i++) {
-            addTile(new Wall (i * 64, Game.HEIGHT * Game.SCALE - 128, 64, 64, true, Id.wall, this));
-            if (i != 0 && i != 1 && i != 5 && i != 6 && i != 7 && i != 13 && i != 14 && i != 15&& i != 16 && i != 17) {
+            addTile(new Wall (i * 64, Game.HEIGHT * Game.SCALE - 64, 64, 64, true, Id.wall, this));
+            if (i != 0 && 
+                i != 1 && 
+                i != 5 && 
+                i != 6 && 
+                i != 7 && 
+                i != 13 && 
+                i != 14 && 
+                i != 15 && 
+                i != 16 && 
+                i != 17) {
                 addTile(new Wall (i * 64, 300, 64, 64, true, Id.wall, this));
 
             }

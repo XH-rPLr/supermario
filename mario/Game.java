@@ -8,7 +8,9 @@ package mario;
 
 	import javax.swing.JFrame;
 
-	import mario.entity.Player;
+import org.w3c.dom.css.RGBColor;
+
+import mario.entity.Player;
 	import mario.graphics.SpriteSheet;
 	import mario.graphics.Sprite;
 import mario.input.KeyInput;
@@ -106,7 +108,7 @@ import mario.tile.Wall;
 	            return;
 	        }
 	        Graphics g = bs.getDrawGraphics();
-	        g.setColor(Color.BLACK);
+	        g.setColor(new Color (135, 206, 235));
 	        g.fillRect(0, 0, getWidth(), getHeight());
 			handler.render(g);
 	        
