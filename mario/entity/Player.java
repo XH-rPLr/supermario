@@ -11,22 +11,27 @@ import mario.Game;
 
 public class Player extends Entity {
 
+	private int frame = 0;
+	private int frameDelay = 0;
+
+	private boolean animate = false;
+
 	public Player(int x, int y, int width, int height, boolean solid, Id id, Handler handler) {
 		super(x, y, width, height, solid, id, handler);
 		
 	}
 
 	public void render(Graphics g) {
-		g.drawImage(Game.player.getBufferedImage(), x, y, width, height, null);
+		g.drawImage(Game.player[frame].getBufferedImage(), x, y, width, height, null);
 	}
 
 	public void tick() {
 		x += velX;
 		y += velY;
-		if (x <= 0) x = 0;
-		if (y <= 0) y = 0;
-		if (x + width >= 1080) x = 1080 - width;
+		
 		if (y + height >= 771) y = 771 - height;
+		if (velX != 0) animate = true;
+		else animate = false;
 		for (Tile t: handler.tile) {
 			if (!t.solid) break;
 			if (t.getId() == Id.wall) {
@@ -34,17 +39,17 @@ public class Player extends Entity {
 					setVelY(0);
 					if (jumping) {
 						jumping = false;
-						gravity = 0;
+						gravity = 0.1;
 						falling = true;
 					}
-				//	y = t.getX() + t.height;
+				
 				}
 				if (getBoundsBottom().intersects(t.getBounds())) {
 					setVelY(0);
 					if (falling) falling = false;
 				} else {
 					if (!falling && !jumping) {
-						gravity = 0.0;
+						gravity = 0.2;
 						falling = true;
 					}
 				}
@@ -70,6 +75,18 @@ public class Player extends Entity {
 			gravity += 0.1;
 			setVelY((int)gravity);
 		}
+
+		if (animate) {
+			frameDelay ++;
+			if (frameDelay >= 50) {
+				frame++;
+				if (frame >= Game.player.length) {
+					frame = 0;
+				}
+				frameDelay = 0;
+		}
+		}
+		
 	}
 
 }

@@ -27,7 +27,7 @@ import mario.tile.Wall;
 		public static SpriteSheet sheet;
 
 		public static Sprite grass;
-		public static Sprite player;
+		public static Sprite player[] = new Sprite[4];
 	    
 	    public Game() {
 	        Dimension size = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
@@ -42,8 +42,12 @@ import mario.tile.Wall;
 
 			addKeyListener(new KeyInput());
 
-			grass = new Sprite(sheet, 2, 1);
-			player = new Sprite(sheet, 1, 1);
+			grass = new Sprite(sheet, 5, 1);
+
+			for (int i = 0; i < player.length; i++) {
+				player[i] = new Sprite(sheet, i + 1 , 1);
+			}
+			
 
 	    	handler.addEntity(new Player(300, 520, 64, 64, true, Id.player, handler));
 	    	
@@ -105,8 +109,7 @@ import mario.tile.Wall;
 	        g.setColor(Color.BLACK);
 	        g.fillRect(0, 0, getWidth(), getHeight());
 			handler.render(g);
-	        // g.setColor(Color.DARK_GRAY);
-	        // g.fillRect(200, 200, getWidth()-400, getHeight()-400);
+	        
 	        g.dispose();
 	        bs.show();
 	    }
