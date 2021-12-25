@@ -5,6 +5,10 @@ package mario;
 	import java.awt.Dimension;
 	import java.awt.Graphics;
 	import java.awt.image.BufferStrategy;
+	import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.*;
 
 	import javax.swing.JFrame;
 
@@ -25,6 +29,7 @@ import mario.tile.Wall;
 
 	    private Thread thread;
 	    private boolean running = false;
+		private BufferedImage image;
 
 	    public static Handler handler;
 		public static SpriteSheet sheet;
@@ -53,8 +58,15 @@ import mario.tile.Wall;
 				player[i] = new Sprite(sheet, i + 1 , 1);
 			}
 			
+	    	//handler.addEntity(new Player(300, 520, 64, 64, true, Id.player, handler));
 
-	    	handler.addEntity(new Player(300, 520, 64, 64, true, Id.player, handler));
+			try {
+				image = ImageIO.read(getClass().getResource("/resources/level.png"));
+			} catch (IOException e) { 
+				e.printStackTrace();
+			}
+
+			handler.createLevel(image);
 	    	
 	    }
 	    
