@@ -10,6 +10,7 @@ package mario;
 
 import org.w3c.dom.css.RGBColor;
 
+import mario.entity.Entity;
 import mario.entity.Player;
 	import mario.graphics.SpriteSheet;
 	import mario.graphics.Sprite;
@@ -27,6 +28,7 @@ import mario.tile.Wall;
 
 	    public static Handler handler;
 		public static SpriteSheet sheet;
+		public static Camera cam;
 
 		public static Sprite grass;
 		public static Sprite player[] = new Sprite[4];
@@ -41,6 +43,7 @@ import mario.tile.Wall;
 	    private void init() {
 	    	handler = new Handler();
 			sheet = new SpriteSheet("/resources/SpriteSheet.png");
+			cam = new Camera();
 
 			addKeyListener(new KeyInput());
 
@@ -110,6 +113,7 @@ import mario.tile.Wall;
 	        Graphics g = bs.getDrawGraphics();
 	        g.setColor(new Color (135, 206, 235));
 	        g.fillRect(0, 0, getWidth(), getHeight());
+			g.translate(cam.getX(), cam.getY());
 			handler.render(g);
 	        
 	        g.dispose();
@@ -118,7 +122,21 @@ import mario.tile.Wall;
 
 	    public void tick() {
 			handler.tick();
+			
+			for (Entity e: handler.entity) {
+				if (e.getId() == Id.player) {
+					cam.tick(e);
+				}
+			}
 	    }
+
+		public static int getFrameWidth() {
+			return WIDTH * SCALE / 2;
+		}
+
+		public static int getFrameHeight() {
+			return HEIGHT * SCALE / 2;
+		}
 
 	    public static void main(String[] args) {
 	        Game game = new Game();
